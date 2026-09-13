@@ -1,0 +1,202 @@
+// ============================================================================
+// Class 185 normal-body sprites and native backwards-running light stack
+// Compact body layout: three 25px rows (front, middle, rear) per livery.
+// ============================================================================
+
+spriteset(spriteset_BR185_lights_front_head, "gfx/DMU/185_lights.png") { template_train32px_old(0, 0) }
+spriteset(spriteset_BR185_lights_front_tail, "gfx/DMU/185_lights.png") { template_train32px_old(0, 25) }
+spriteset(spriteset_BR185_lights_rear_head, "gfx/DMU/185_lights.png") { template_train32px_old(0, 50) }
+spriteset(spriteset_BR185_lights_rear_tail, "gfx/DMU/185_lights.png") { template_train32px_old(0, 75) }
+spriteset(spriteset_BR185_lights_off, "gfx/DMU/185_lights.png") { template_train32px_old(0, 100) }
+
+spriteset(spriteset_BR185_Purchase, "gfx/DMU/185.png") { template_purchase(400, 0) }
+
+spriteset(spriteset_BR185a_FirstDynamic, "gfx/DMU/185.png") { template_train32px_old(0, 0) }
+
+spriteset(spriteset_BR185a_FirstDynamic_loading, "gfx/DMU/185.png") { template_train32px_old(200, 0) }
+
+spriteset(spriteset_BR185b_FirstDynamic, "gfx/DMU/185.png") { template_train32px_old(0, 25) }
+
+spriteset(spriteset_BR185b_FirstDynamic_loading, "gfx/DMU/185.png") { template_train32px_old(200, 25) }
+
+spriteset(spriteset_BR185c_FirstDynamic, "gfx/DMU/185.png") { template_train32px_old(0, 50) }
+
+spriteset(spriteset_BR185c_FirstDynamic_loading, "gfx/DMU/185.png") { template_train32px_old(200, 50) }
+
+spriteset(spriteset_BR185a_FirstGroup, "gfx/DMU/185.png") { template_train32px_old(0, 75) }
+
+spriteset(spriteset_BR185a_FirstGroup_loading, "gfx/DMU/185.png") { template_train32px_old(200, 75) }
+
+spriteset(spriteset_BR185b_FirstGroup, "gfx/DMU/185.png") { template_train32px_old(0, 100) }
+
+spriteset(spriteset_BR185b_FirstGroup_loading, "gfx/DMU/185.png") { template_train32px_old(200, 100) }
+
+spriteset(spriteset_BR185c_FirstGroup, "gfx/DMU/185.png") { template_train32px_old(0, 125) }
+
+spriteset(spriteset_BR185c_FirstGroup_loading, "gfx/DMU/185.png") { template_train32px_old(200, 125) }
+
+spriteset(spriteset_BR185a_FirstTPEGeometric, "gfx/DMU/185.png") { template_train32px_old(0, 150) }
+
+spriteset(spriteset_BR185a_FirstTPEGeometric_loading, "gfx/DMU/185.png") { template_train32px_old(200, 150) }
+
+spriteset(spriteset_BR185b_FirstTPEGeometric, "gfx/DMU/185.png") { template_train32px_old(0, 175) }
+
+spriteset(spriteset_BR185b_FirstTPEGeometric_loading, "gfx/DMU/185.png") { template_train32px_old(200, 175) }
+
+spriteset(spriteset_BR185c_FirstTPEGeometric, "gfx/DMU/185.png") { template_train32px_old(0, 200) }
+
+spriteset(spriteset_BR185c_FirstTPEGeometric_loading, "gfx/DMU/185.png") { template_train32px_old(200, 200) }
+
+spritegroup spritegroup_BR185a_FirstDynamic {
+	loading: spriteset_BR185a_FirstDynamic_loading;
+	loaded: spriteset_BR185a_FirstDynamic;
+}
+
+spritegroup spritegroup_BR185b_FirstDynamic {
+	loading: spriteset_BR185b_FirstDynamic_loading;
+	loaded: spriteset_BR185b_FirstDynamic;
+}
+
+spritegroup spritegroup_BR185c_FirstDynamic {
+	loading: spriteset_BR185c_FirstDynamic_loading;
+	loaded: spriteset_BR185c_FirstDynamic;
+}
+
+spritegroup spritegroup_BR185a_FirstGroup {
+	loading: spriteset_BR185a_FirstGroup_loading;
+	loaded: spriteset_BR185a_FirstGroup;
+}
+
+spritegroup spritegroup_BR185b_FirstGroup {
+	loading: spriteset_BR185b_FirstGroup_loading;
+	loaded: spriteset_BR185b_FirstGroup;
+}
+
+spritegroup spritegroup_BR185c_FirstGroup {
+	loading: spriteset_BR185c_FirstGroup_loading;
+	loaded: spriteset_BR185c_FirstGroup;
+}
+
+spritegroup spritegroup_BR185a_FirstTPEGeometric {
+	loading: spriteset_BR185a_FirstTPEGeometric_loading;
+	loaded: spriteset_BR185a_FirstTPEGeometric;
+}
+
+spritegroup spritegroup_BR185b_FirstTPEGeometric {
+	loading: spriteset_BR185b_FirstTPEGeometric_loading;
+	loaded: spriteset_BR185b_FirstTPEGeometric;
+}
+
+spritegroup spritegroup_BR185c_FirstTPEGeometric {
+	loading: spriteset_BR185c_FirstTPEGeometric_loading;
+	loaded: spriteset_BR185c_FirstTPEGeometric;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185a_FirstDynamic_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185a_FirstDynamic;
+	spritegroup_BR185a_FirstDynamic;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185b_FirstDynamic_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185b_FirstDynamic;
+	spritegroup_BR185b_FirstDynamic;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185c_FirstDynamic_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185c_FirstDynamic;
+	spritegroup_BR185c_FirstDynamic;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185a_FirstGroup_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185a_FirstGroup;
+	spritegroup_BR185a_FirstGroup;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185b_FirstGroup_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185b_FirstGroup;
+	spritegroup_BR185b_FirstGroup;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185c_FirstGroup_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185c_FirstGroup;
+	spritegroup_BR185c_FirstGroup;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185a_FirstTPEGeometric_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185a_FirstTPEGeometric;
+	spritegroup_BR185a_FirstTPEGeometric;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185b_FirstTPEGeometric_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185b_FirstTPEGeometric;
+	spritegroup_BR185b_FirstTPEGeometric;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185c_FirstTPEGeometric_loading_mode, param_loading_sprites) {
+	0: spriteset_BR185c_FirstTPEGeometric;
+	spritegroup_BR185c_FirstTPEGeometric;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185a, cargo_subtype) {
+	0: sw_BR185a_FirstDynamic_loading_mode;
+	1: sw_BR185a_FirstGroup_loading_mode;
+	2: sw_BR185a_FirstTPEGeometric_loading_mode;
+	default: sw_BR185a_FirstDynamic_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185b, cargo_subtype) {
+	0: sw_BR185b_FirstDynamic_loading_mode;
+	1: sw_BR185b_FirstGroup_loading_mode;
+	2: sw_BR185b_FirstTPEGeometric_loading_mode;
+	default: sw_BR185b_FirstDynamic_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR185c, cargo_subtype) {
+	0: sw_BR185c_FirstDynamic_loading_mode;
+	1: sw_BR185c_FirstGroup_loading_mode;
+	2: sw_BR185c_FirstTPEGeometric_loading_mode;
+	default: sw_BR185c_FirstDynamic_loading_mode;
+}
+
+switch(FEAT_TRAINS,SELF,sw_BR185_cargo_subtype_text,cargo_subtype){
+	0:	return string(str_FirstDynamic);
+	1:	return string(str_FirstGroup);
+	2:	return string(str_FirstTPEGeometric);
+	return CB_RESULT_NO_TEXT;
+}
+
+// The body layer uses normal vehicle sprites only. The light layer selects the
+// illuminated whole-consist end from OpenTTD's native backwards-running state;
+// all intermediate cabs receive the empty overlay.
+switch(FEAT_TRAINS, SELF, sw_BR185_body_layer,
+		[STORE_TEMP(CB_FLAG_MORE_SPRITES | PALETTE_USE_DEFAULT, 0x100), position_in_articulated_veh % 3]) {
+	0: sw_BR185a;
+	1: sw_BR185b;
+	2: sw_BR185c;
+	sw_BR185a;
+}
+switch(FEAT_TRAINS, SELF, sw_BR185_lights_forward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR185_lights_rear_tail;
+	spriteset_BR185_lights_off;
+}
+switch(FEAT_TRAINS, SELF, sw_BR185_lights_forward, position_in_consist) {
+	0: spriteset_BR185_lights_front_head;
+	sw_BR185_lights_forward_from_end;
+}
+switch(FEAT_TRAINS, SELF, sw_BR185_lights_backward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR185_lights_rear_head;
+	spriteset_BR185_lights_off;
+}
+switch(FEAT_TRAINS, SELF, sw_BR185_lights_backward, position_in_consist) {
+	0: spriteset_BR185_lights_front_tail;
+	sw_BR185_lights_backward_from_end;
+}
+switch(FEAT_TRAINS, SELF, sw_BR185_light_layer,
+		[STORE_TEMP(PALETTE_IDENTITY, 0x100), train_is_driving_backwards]) {
+	1: sw_BR185_lights_backward;
+	sw_BR185_lights_forward;
+}
+switch(FEAT_TRAINS, SELF, sw_BR185_sprite_stack, getbits(extra_callback_info1, 8, 8)) {
+	1: sw_BR185_light_layer;
+	sw_BR185_body_layer;
+}
