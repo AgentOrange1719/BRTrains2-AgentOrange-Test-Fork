@@ -1,0 +1,511 @@
+// ============================================================================
+// Class 350 sprite and MW switch definitions
+// ============================================================================
+//
+// The Class 350 uses OpenTTD's native backwards-running state.  Layer 0 draws
+// the physical vehicle body without baked-in lamps.  Layer 1 draws headlights,
+// tail lights, or an empty sprite according to the whole-consist end positions
+// and train_is_driving_backwards.  This keeps intermediate cabs dark when two
+// or more units are coupled, without mirroring or geographically swapping the
+// vehicle graphics.
+//
+// CAR ROLE MAPPING (position a/b/c/d = articulated index 0/1/2/3)
+//   a (0) = front cab
+//   b (1) = 2nd car
+//   c (2) = 3rd car
+//   d (3) = rear cab
+//
+// ============================================================================
+
+
+// ============================================================================
+// SPRITESETS
+// Source: gfx/EMU/350_450.png
+//
+// PNG layout convention:
+//   Main sprites at x=0 and loading sprites at x=200.
+//   Rows per Class 350 livery are in this order: a, b, c, d.
+//
+// Each Class 350 livery occupies four rows (4 * 25px = 100px). Compact Class
+// 450 graphics follow at y=600 in the shared sheet.
+// ============================================================================
+spriteset(spriteset_BR350_Purchase, "gfx/EMU/350_450.png") { template_purchase(400, 0) }
+
+// Direction-dependent light overlays. The fifth row is deliberately empty.
+spriteset(spriteset_BR350_lights_a_head, "gfx/EMU/350_lights.png") { template_train32px_old(0, 0) }
+spriteset(spriteset_BR350_lights_a_tail, "gfx/EMU/350_lights.png") { template_train32px_old(0, 25) }
+spriteset(spriteset_BR350_lights_d_head, "gfx/EMU/350_lights.png") { template_train32px_old(0, 50) }
+spriteset(spriteset_BR350_lights_d_tail, "gfx/EMU/350_lights.png") { template_train32px_old(0, 75) }
+spriteset(spriteset_BR350_lights_off, "gfx/EMU/350_lights.png") { template_train32px_old(0, 100) }
+
+// London Midland (y=0)
+spriteset(spriteset_BR350a_LM, "gfx/EMU/350_450.png") { template_train32px_old(0, 0) }
+spriteset(spriteset_BR350a_LM_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 0) }
+spriteset(spriteset_BR350b_LM, "gfx/EMU/350_450.png") { template_train32px_old(0, 25) }
+spriteset(spriteset_BR350b_LM_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 25) }
+spriteset(spriteset_BR350c_LM, "gfx/EMU/350_450.png") { template_train32px_old(0, 50) }
+spriteset(spriteset_BR350c_LM_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 50) }
+spriteset(spriteset_BR350d_LM, "gfx/EMU/350_450.png") { template_train32px_old(0, 75) }
+spriteset(spriteset_BR350d_LM_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 75) }
+
+// Silverlink Central (y=100)
+spriteset(spriteset_BR350a_SLinkCentral, "gfx/EMU/350_450.png") { template_train32px_old(0, 100) }
+spriteset(spriteset_BR350a_SLinkCentral_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 100) }
+spriteset(spriteset_BR350b_SLinkCentral, "gfx/EMU/350_450.png") { template_train32px_old(0, 125) }
+spriteset(spriteset_BR350b_SLinkCentral_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 125) }
+spriteset(spriteset_BR350c_SLinkCentral, "gfx/EMU/350_450.png") { template_train32px_old(0, 150) }
+spriteset(spriteset_BR350c_SLinkCentral_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 150) }
+spriteset(spriteset_BR350d_SLinkCentral, "gfx/EMU/350_450.png") { template_train32px_old(0, 175) }
+spriteset(spriteset_BR350d_SLinkCentral_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 175) }
+
+// TransPennine Express (y=200) - 350/3+4 only
+spriteset(spriteset_BR350a_TPE, "gfx/EMU/350_450.png") { template_train32px_old(0, 200) }
+spriteset(spriteset_BR350a_TPE_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 200) }
+spriteset(spriteset_BR350b_TPE, "gfx/EMU/350_450.png") { template_train32px_old(0, 225) }
+spriteset(spriteset_BR350b_TPE_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 225) }
+spriteset(spriteset_BR350c_TPE, "gfx/EMU/350_450.png") { template_train32px_old(0, 250) }
+spriteset(spriteset_BR350c_TPE_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 250) }
+spriteset(spriteset_BR350d_TPE, "gfx/EMU/350_450.png") { template_train32px_old(0, 275) }
+spriteset(spriteset_BR350d_TPE_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 275) }
+
+// LNWR Transitional (y=300) - 350/1 and 350/2 only
+spriteset(spriteset_BR350a_LNWRSimple, "gfx/EMU/350_450.png") { template_train32px_old(0, 300) }
+spriteset(spriteset_BR350a_LNWRSimple_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 300) }
+spriteset(spriteset_BR350b_LNWRSimple, "gfx/EMU/350_450.png") { template_train32px_old(0, 325) }
+spriteset(spriteset_BR350b_LNWRSimple_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 325) }
+spriteset(spriteset_BR350c_LNWRSimple, "gfx/EMU/350_450.png") { template_train32px_old(0, 350) }
+spriteset(spriteset_BR350c_LNWRSimple_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 350) }
+spriteset(spriteset_BR350d_LNWRSimple, "gfx/EMU/350_450.png") { template_train32px_old(0, 375) }
+spriteset(spriteset_BR350d_LNWRSimple_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 375) }
+
+// LNWR Full (y=400) - 350/1 and 350/3+4 only
+spriteset(spriteset_BR350a_LNWRFull, "gfx/EMU/350_450.png") { template_train32px_old(0, 400) }
+spriteset(spriteset_BR350a_LNWRFull_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 400) }
+spriteset(spriteset_BR350b_LNWRFull, "gfx/EMU/350_450.png") { template_train32px_old(0, 425) }
+spriteset(spriteset_BR350b_LNWRFull_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 425) }
+spriteset(spriteset_BR350c_LNWRFull, "gfx/EMU/350_450.png") { template_train32px_old(0, 450) }
+spriteset(spriteset_BR350c_LNWRFull_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 450) }
+spriteset(spriteset_BR350d_LNWRFull, "gfx/EMU/350_450.png") { template_train32px_old(0, 475) }
+spriteset(spriteset_BR350d_LNWRFull_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 475) }
+
+// LNWR Ukraine (y=500) - 350/1 only
+spriteset(spriteset_BR350a_LNWRUkraine, "gfx/EMU/350_450.png") { template_train32px_old(0, 500) }
+spriteset(spriteset_BR350a_LNWRUkraine_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 500) }
+spriteset(spriteset_BR350b_LNWRUkraine, "gfx/EMU/350_450.png") { template_train32px_old(0, 525) }
+spriteset(spriteset_BR350b_LNWRUkraine_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 525) }
+spriteset(spriteset_BR350c_LNWRUkraine, "gfx/EMU/350_450.png") { template_train32px_old(0, 550) }
+spriteset(spriteset_BR350c_LNWRUkraine_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 550) }
+spriteset(spriteset_BR350d_LNWRUkraine, "gfx/EMU/350_450.png") { template_train32px_old(0, 575) }
+spriteset(spriteset_BR350d_LNWRUkraine_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 575) }
+
+
+// ============================================================================
+// LOADING SPRITEGROUPS / PARAM GATES
+// Each loading-mode switch returns closed-door sprites when parameter is 0,
+// or a loading/loaded spritegroup when parameter is enabled.
+// ============================================================================
+
+spritegroup spritegroup_BR350a_LM {
+	loading: spriteset_BR350a_LM_loading;
+	loaded: spriteset_BR350a_LM;
+}
+
+spritegroup spritegroup_BR350b_LM {
+	loading: spriteset_BR350b_LM_loading;
+	loaded: spriteset_BR350b_LM;
+}
+
+spritegroup spritegroup_BR350c_LM {
+	loading: spriteset_BR350c_LM_loading;
+	loaded: spriteset_BR350c_LM;
+}
+
+spritegroup spritegroup_BR350d_LM {
+	loading: spriteset_BR350d_LM_loading;
+	loaded: spriteset_BR350d_LM;
+}
+
+spritegroup spritegroup_BR350a_SLinkCentral {
+	loading: spriteset_BR350a_SLinkCentral_loading;
+	loaded: spriteset_BR350a_SLinkCentral;
+}
+
+spritegroup spritegroup_BR350b_SLinkCentral {
+	loading: spriteset_BR350b_SLinkCentral_loading;
+	loaded: spriteset_BR350b_SLinkCentral;
+}
+
+spritegroup spritegroup_BR350c_SLinkCentral {
+	loading: spriteset_BR350c_SLinkCentral_loading;
+	loaded: spriteset_BR350c_SLinkCentral;
+}
+
+spritegroup spritegroup_BR350d_SLinkCentral {
+	loading: spriteset_BR350d_SLinkCentral_loading;
+	loaded: spriteset_BR350d_SLinkCentral;
+}
+
+spritegroup spritegroup_BR350a_TPE {
+	loading: spriteset_BR350a_TPE_loading;
+	loaded: spriteset_BR350a_TPE;
+}
+
+spritegroup spritegroup_BR350b_TPE {
+	loading: spriteset_BR350b_TPE_loading;
+	loaded: spriteset_BR350b_TPE;
+}
+
+spritegroup spritegroup_BR350c_TPE {
+	loading: spriteset_BR350c_TPE_loading;
+	loaded: spriteset_BR350c_TPE;
+}
+
+spritegroup spritegroup_BR350d_TPE {
+	loading: spriteset_BR350d_TPE_loading;
+	loaded: spriteset_BR350d_TPE;
+}
+
+spritegroup spritegroup_BR350a_LNWRSimple {
+	loading: spriteset_BR350a_LNWRSimple_loading;
+	loaded: spriteset_BR350a_LNWRSimple;
+}
+
+spritegroup spritegroup_BR350b_LNWRSimple {
+	loading: spriteset_BR350b_LNWRSimple_loading;
+	loaded: spriteset_BR350b_LNWRSimple;
+}
+
+spritegroup spritegroup_BR350c_LNWRSimple {
+	loading: spriteset_BR350c_LNWRSimple_loading;
+	loaded: spriteset_BR350c_LNWRSimple;
+}
+
+spritegroup spritegroup_BR350d_LNWRSimple {
+	loading: spriteset_BR350d_LNWRSimple_loading;
+	loaded: spriteset_BR350d_LNWRSimple;
+}
+
+spritegroup spritegroup_BR350a_LNWRFull {
+	loading: spriteset_BR350a_LNWRFull_loading;
+	loaded: spriteset_BR350a_LNWRFull;
+}
+
+spritegroup spritegroup_BR350b_LNWRFull {
+	loading: spriteset_BR350b_LNWRFull_loading;
+	loaded: spriteset_BR350b_LNWRFull;
+}
+
+spritegroup spritegroup_BR350c_LNWRFull {
+	loading: spriteset_BR350c_LNWRFull_loading;
+	loaded: spriteset_BR350c_LNWRFull;
+}
+
+spritegroup spritegroup_BR350d_LNWRFull {
+	loading: spriteset_BR350d_LNWRFull_loading;
+	loaded: spriteset_BR350d_LNWRFull;
+}
+
+spritegroup spritegroup_BR350a_LNWRUkraine {
+	loading: spriteset_BR350a_LNWRUkraine_loading;
+	loaded: spriteset_BR350a_LNWRUkraine;
+}
+
+spritegroup spritegroup_BR350b_LNWRUkraine {
+	loading: spriteset_BR350b_LNWRUkraine_loading;
+	loaded: spriteset_BR350b_LNWRUkraine;
+}
+
+spritegroup spritegroup_BR350c_LNWRUkraine {
+	loading: spriteset_BR350c_LNWRUkraine_loading;
+	loaded: spriteset_BR350c_LNWRUkraine;
+}
+
+spritegroup spritegroup_BR350d_LNWRUkraine {
+	loading: spriteset_BR350d_LNWRUkraine_loading;
+	loaded: spriteset_BR350d_LNWRUkraine;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350a_LM_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350a_LM;
+	spritegroup_BR350a_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350b_LM_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350b_LM;
+	spritegroup_BR350b_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350c_LM_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350c_LM;
+	spritegroup_BR350c_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350d_LM_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350d_LM;
+	spritegroup_BR350d_LM;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350a_SLinkCentral_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350a_SLinkCentral;
+	spritegroup_BR350a_SLinkCentral;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350b_SLinkCentral_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350b_SLinkCentral;
+	spritegroup_BR350b_SLinkCentral;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350c_SLinkCentral_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350c_SLinkCentral;
+	spritegroup_BR350c_SLinkCentral;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350d_SLinkCentral_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350d_SLinkCentral;
+	spritegroup_BR350d_SLinkCentral;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350a_TPE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350a_TPE;
+	spritegroup_BR350a_TPE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350b_TPE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350b_TPE;
+	spritegroup_BR350b_TPE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350c_TPE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350c_TPE;
+	spritegroup_BR350c_TPE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350d_TPE_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350d_TPE;
+	spritegroup_BR350d_TPE;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350a_LNWRSimple_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350a_LNWRSimple;
+	spritegroup_BR350a_LNWRSimple;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350b_LNWRSimple_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350b_LNWRSimple;
+	spritegroup_BR350b_LNWRSimple;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350c_LNWRSimple_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350c_LNWRSimple;
+	spritegroup_BR350c_LNWRSimple;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350d_LNWRSimple_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350d_LNWRSimple;
+	spritegroup_BR350d_LNWRSimple;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350a_LNWRFull_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350a_LNWRFull;
+	spritegroup_BR350a_LNWRFull;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350b_LNWRFull_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350b_LNWRFull;
+	spritegroup_BR350b_LNWRFull;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350c_LNWRFull_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350c_LNWRFull;
+	spritegroup_BR350c_LNWRFull;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350d_LNWRFull_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350d_LNWRFull;
+	spritegroup_BR350d_LNWRFull;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350a_LNWRUkraine_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350a_LNWRUkraine;
+	spritegroup_BR350a_LNWRUkraine;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350b_LNWRUkraine_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350b_LNWRUkraine;
+	spritegroup_BR350b_LNWRUkraine;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350c_LNWRUkraine_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350c_LNWRUkraine;
+	spritegroup_BR350c_LNWRUkraine;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350d_LNWRUkraine_loading_mode, param_loading_sprites) {
+	0: spriteset_BR350d_LNWRUkraine;
+	spritegroup_BR350d_LNWRUkraine;
+}
+
+// ============================================================================
+// CLASS 350/1  -  subtype: 0=LM  1=Silverlink  2=LNWR Trans  3=LNWR Full
+//                          4=LNWR Ukraine
+// ============================================================================
+
+// Forward: cargo_subtype selects the livery spriteset for each car position.
+switch(FEAT_TRAINS, SELF, sw_BR350_1a, cargo_subtype) {
+	0: sw_BR350a_LM_loading_mode;          1: sw_BR350a_SLinkCentral_loading_mode;
+	2: sw_BR350a_LNWRSimple_loading_mode;  3: sw_BR350a_LNWRFull_loading_mode;
+	4: sw_BR350a_LNWRUkraine_loading_mode;
+	default: sw_BR350a_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_1b, cargo_subtype) {
+	0: sw_BR350b_LM_loading_mode;          1: sw_BR350b_SLinkCentral_loading_mode;
+	2: sw_BR350b_LNWRSimple_loading_mode;  3: sw_BR350b_LNWRFull_loading_mode;
+	4: sw_BR350b_LNWRUkraine_loading_mode;
+	default: sw_BR350b_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_1c, cargo_subtype) {
+	0: sw_BR350c_LM_loading_mode;          1: sw_BR350c_SLinkCentral_loading_mode;
+	2: sw_BR350c_LNWRSimple_loading_mode;  3: sw_BR350c_LNWRFull_loading_mode;
+	4: sw_BR350c_LNWRUkraine_loading_mode;
+	default: sw_BR350c_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_1d, cargo_subtype) {
+	0: sw_BR350d_LM_loading_mode;          1: sw_BR350d_SLinkCentral_loading_mode;
+	2: sw_BR350d_LNWRSimple_loading_mode;  3: sw_BR350d_LNWRFull_loading_mode;
+	4: sw_BR350d_LNWRUkraine_loading_mode;
+	default: sw_BR350d_LM_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_LondonMidland);
+	1: return string(str_SilverlinkCentral);
+	2: return string(str_LNWRSimple);
+	3: return string(str_LNWR);
+	4: return string(STR_LIVERY, string(str_LNWR), string(str_special_Ukraine));
+	return CB_RESULT_NO_TEXT;
+}
+
+
+// ============================================================================
+// CLASS 350/2  -  subtype: 0=LM  1=LNWR Trans
+// ============================================================================
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2a, cargo_subtype) {
+	0: sw_BR350a_LM_loading_mode;
+	1: sw_BR350a_LNWRSimple_loading_mode;
+	default: sw_BR350a_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2b, cargo_subtype) {
+	0: sw_BR350b_LM_loading_mode;
+	1: sw_BR350b_LNWRSimple_loading_mode;
+	default: sw_BR350b_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2c, cargo_subtype) {
+	0: sw_BR350c_LM_loading_mode;
+	1: sw_BR350c_LNWRSimple_loading_mode;
+	default: sw_BR350c_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2d, cargo_subtype) {
+	0: sw_BR350d_LM_loading_mode;
+	1: sw_BR350d_LNWRSimple_loading_mode;
+	default: sw_BR350d_LM_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_2_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_LondonMidland);
+	1: return string(str_LNWRSimple);
+	return CB_RESULT_NO_TEXT;
+}
+
+
+// ============================================================================
+// CLASS 350/3+4  -  subtype: 0=LM  1=TPE  2=LNWR Full
+// ============================================================================
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34a, cargo_subtype) {
+	0: sw_BR350a_LM_loading_mode;       1: sw_BR350a_TPE_loading_mode;
+	2: sw_BR350a_LNWRFull_loading_mode;
+	default: sw_BR350a_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34b, cargo_subtype) {
+	0: sw_BR350b_LM_loading_mode;       1: sw_BR350b_TPE_loading_mode;
+	2: sw_BR350b_LNWRFull_loading_mode;
+	default: sw_BR350b_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34c, cargo_subtype) {
+	0: sw_BR350c_LM_loading_mode;       1: sw_BR350c_TPE_loading_mode;
+	2: sw_BR350c_LNWRFull_loading_mode;
+	default: sw_BR350c_LM_loading_mode;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34d, cargo_subtype) {
+	0: sw_BR350d_LM_loading_mode;       1: sw_BR350d_TPE_loading_mode;
+	2: sw_BR350d_LNWRFull_loading_mode;
+	default: sw_BR350d_LM_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_34_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_LondonMidland);
+	1: return string(str_TPE);
+	2: return string(str_LNWR);
+	return CB_RESULT_NO_TEXT;
+}
+
+
+// ============================================================================
+// NATIVE BACKWARDS-RUNNING SPRITE STACK
+//
+// Layer 0 is the normal body sprite. Layer 1 is a palette-identity light
+// overlay. No light layer asks for a further sprite, leaving room for a future
+// pantograph/equipment layer between the body and lights.
+// ============================================================================
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1_body_layer,
+		[STORE_TEMP(CB_FLAG_MORE_SPRITES | PALETTE_USE_DEFAULT, 0x100),
+		 position_in_articulated_veh % 4]) {
+	0: sw_BR350_1a; 1: sw_BR350_1b; 2: sw_BR350_1c; 3: sw_BR350_1d;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2_body_layer,
+		[STORE_TEMP(CB_FLAG_MORE_SPRITES | PALETTE_USE_DEFAULT, 0x100),
+		 position_in_articulated_veh % 4]) {
+	0: sw_BR350_2a; 1: sw_BR350_2b; 2: sw_BR350_2c; 3: sw_BR350_2d;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34_body_layer,
+		[STORE_TEMP(CB_FLAG_MORE_SPRITES | PALETTE_USE_DEFAULT, 0x100),
+		 position_in_articulated_veh % 4]) {
+	0: sw_BR350_34a; 1: sw_BR350_34b; 2: sw_BR350_34c; 3: sw_BR350_34d;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_lights_forward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR350_lights_d_tail;
+	spriteset_BR350_lights_off;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_lights_forward, position_in_consist) {
+	0: spriteset_BR350_lights_a_head;
+	sw_BR350_lights_forward_from_end;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_lights_backward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR350_lights_d_head;
+	spriteset_BR350_lights_off;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_lights_backward, position_in_consist) {
+	0: spriteset_BR350_lights_a_tail;
+	sw_BR350_lights_backward_from_end;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_light_layer,
+		[STORE_TEMP(PALETTE_IDENTITY, 0x100), train_is_driving_backwards]) {
+	1: sw_BR350_lights_backward;
+	sw_BR350_lights_forward;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR350_1_sprite_stack, getbits(extra_callback_info1, 8, 8)) {
+	1: sw_BR350_light_layer;
+	sw_BR350_1_body_layer;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_2_sprite_stack, getbits(extra_callback_info1, 8, 8)) {
+	1: sw_BR350_light_layer;
+	sw_BR350_2_body_layer;
+}
+switch(FEAT_TRAINS, SELF, sw_BR350_34_sprite_stack, getbits(extra_callback_info1, 8, 8)) {
+	1: sw_BR350_light_layer;
+	sw_BR350_34_body_layer;
+}
