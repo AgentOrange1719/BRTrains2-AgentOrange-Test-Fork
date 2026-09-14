@@ -1,0 +1,200 @@
+// ============================================================================
+// Class 444 normal-body sprites and native backwards-running lights
+// Three compact rows per livery.
+// ============================================================================
+
+spriteset(spriteset_BR444_lights_front_head, "gfx/EMU/444_lights.png") { template_train32px_old(0, 0) }
+
+spriteset(spriteset_BR444_lights_front_tail, "gfx/EMU/444_lights.png") { template_train32px_old(0, 25) }
+
+spriteset(spriteset_BR444_lights_rear_head, "gfx/EMU/444_lights.png") { template_train32px_old(0, 50) }
+
+spriteset(spriteset_BR444_lights_rear_tail, "gfx/EMU/444_lights.png") { template_train32px_old(0, 75) }
+
+spriteset(spriteset_BR444_lights_off, "gfx/EMU/444_lights.png") { template_train32px_old(0, 100) }
+
+spriteset(spriteset_BR444_Purchase, "gfx/EMU/444.png") { template_purchase(400, 0) }
+
+spriteset(spriteset_BR444_a_SWT, "gfx/EMU/444.png") { template_train32px_old(0, 0) }
+
+spriteset(spriteset_BR444_a_SWT_loading, "gfx/EMU/444.png") { template_train32px_old(200, 0) }
+
+spriteset(spriteset_BR444_b_SWT, "gfx/EMU/444.png") { template_train32px_old(0, 25) }
+
+spriteset(spriteset_BR444_b_SWT_loading, "gfx/EMU/444.png") { template_train32px_old(200, 25) }
+
+spriteset(spriteset_BR444_c_SWT, "gfx/EMU/444.png") { template_train32px_old(0, 50) }
+
+spriteset(spriteset_BR444_c_SWT_loading, "gfx/EMU/444.png") { template_train32px_old(200, 50) }
+
+spriteset(spriteset_BR444_a_SWR, "gfx/EMU/444.png") { template_train32px_old(0, 75) }
+
+spriteset(spriteset_BR444_a_SWR_loading, "gfx/EMU/444.png") { template_train32px_old(200, 75) }
+
+spriteset(spriteset_BR444_b_SWR, "gfx/EMU/444.png") { template_train32px_old(0, 100) }
+
+spriteset(spriteset_BR444_b_SWR_loading, "gfx/EMU/444.png") { template_train32px_old(200, 100) }
+
+spriteset(spriteset_BR444_c_SWR, "gfx/EMU/444.png") { template_train32px_old(0, 125) }
+
+spriteset(spriteset_BR444_c_SWR_loading, "gfx/EMU/444.png") { template_train32px_old(200, 125) }
+
+spriteset(spriteset_BR444_a_SWRPride, "gfx/EMU/444.png") { template_train32px_old(0, 150) }
+
+spriteset(spriteset_BR444_a_SWRPride_loading, "gfx/EMU/444.png") { template_train32px_old(200, 150) }
+
+spriteset(spriteset_BR444_b_SWRPride, "gfx/EMU/444.png") { template_train32px_old(0, 175) }
+
+spriteset(spriteset_BR444_b_SWRPride_loading, "gfx/EMU/444.png") { template_train32px_old(200, 175) }
+
+spriteset(spriteset_BR444_c_SWRPride, "gfx/EMU/444.png") { template_train32px_old(0, 200) }
+
+spriteset(spriteset_BR444_c_SWRPride_loading, "gfx/EMU/444.png") { template_train32px_old(200, 200) }
+
+spritegroup spritegroup_BR444_a_SWT {
+	loading: spriteset_BR444_a_SWT_loading;
+	loaded: spriteset_BR444_a_SWT;
+}
+
+spritegroup spritegroup_BR444_b_SWT {
+	loading: spriteset_BR444_b_SWT_loading;
+	loaded: spriteset_BR444_b_SWT;
+}
+
+spritegroup spritegroup_BR444_c_SWT {
+	loading: spriteset_BR444_c_SWT_loading;
+	loaded: spriteset_BR444_c_SWT;
+}
+
+spritegroup spritegroup_BR444_a_SWR {
+	loading: spriteset_BR444_a_SWR_loading;
+	loaded: spriteset_BR444_a_SWR;
+}
+
+spritegroup spritegroup_BR444_b_SWR {
+	loading: spriteset_BR444_b_SWR_loading;
+	loaded: spriteset_BR444_b_SWR;
+}
+
+spritegroup spritegroup_BR444_c_SWR {
+	loading: spriteset_BR444_c_SWR_loading;
+	loaded: spriteset_BR444_c_SWR;
+}
+
+spritegroup spritegroup_BR444_a_SWRPride {
+	loading: spriteset_BR444_a_SWRPride_loading;
+	loaded: spriteset_BR444_a_SWRPride;
+}
+
+spritegroup spritegroup_BR444_b_SWRPride {
+	loading: spriteset_BR444_b_SWRPride_loading;
+	loaded: spriteset_BR444_b_SWRPride;
+}
+
+spritegroup spritegroup_BR444_c_SWRPride {
+	loading: spriteset_BR444_c_SWRPride_loading;
+	loaded: spriteset_BR444_c_SWRPride;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_a_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_a_SWT;
+	spritegroup_BR444_a_SWT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_b_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_b_SWT;
+	spritegroup_BR444_b_SWT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_c_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_c_SWT;
+	spritegroup_BR444_c_SWT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_a_SWR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_a_SWR;
+	spritegroup_BR444_a_SWR;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_b_SWR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_b_SWR;
+	spritegroup_BR444_b_SWR;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_c_SWR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_c_SWR;
+	spritegroup_BR444_c_SWR;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_a_SWRPride_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_a_SWRPride;
+	spritegroup_BR444_a_SWRPride;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_b_SWRPride_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_b_SWRPride;
+	spritegroup_BR444_b_SWRPride;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_c_SWRPride_loading_mode, param_loading_sprites) {
+	0: spriteset_BR444_c_SWRPride;
+	spritegroup_BR444_c_SWRPride;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_a, cargo_subtype) {
+	0: sw_BR444_a_SWT_loading_mode;
+	1: sw_BR444_a_SWR_loading_mode;
+	2: sw_BR444_a_SWRPride_loading_mode;
+	default: sw_BR444_a_SWT_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_b, cargo_subtype) {
+	0: sw_BR444_b_SWT_loading_mode;
+	1: sw_BR444_b_SWR_loading_mode;
+	2: sw_BR444_b_SWRPride_loading_mode;
+	default: sw_BR444_b_SWT_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_c, cargo_subtype) {
+	0: sw_BR444_c_SWT_loading_mode;
+	1: sw_BR444_c_SWR_loading_mode;
+	2: sw_BR444_c_SWRPride_loading_mode;
+	default: sw_BR444_c_SWT_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_body_layer,
+		[STORE_TEMP(CB_FLAG_MORE_SPRITES | PALETTE_USE_DEFAULT, 0x100), position_in_articulated_veh % 5]) {
+	0: sw_BR444_a; 4: sw_BR444_c;
+	sw_BR444_b;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_lights_forward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR444_lights_rear_tail;
+	spriteset_BR444_lights_off;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_lights_forward, position_in_consist) {
+	0: spriteset_BR444_lights_front_head;
+	sw_BR444_lights_forward_from_end;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_lights_backward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR444_lights_rear_head;
+	spriteset_BR444_lights_off;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_lights_backward, position_in_consist) {
+	0: spriteset_BR444_lights_front_tail;
+	sw_BR444_lights_backward_from_end;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_light_layer,
+		[STORE_TEMP(PALETTE_IDENTITY, 0x100), train_is_driving_backwards]) {
+	1: sw_BR444_lights_backward;
+	sw_BR444_lights_forward;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR444_sprite_stack, getbits(extra_callback_info1, 8, 8)) {
+	1: sw_BR444_light_layer;
+	sw_BR444_body_layer;
+}
