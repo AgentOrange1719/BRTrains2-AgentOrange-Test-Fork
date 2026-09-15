@@ -1,33 +1,191 @@
-spriteset(spriteset_BR380_Purchase, "gfx/EMU/380.png") {
-	template_purchase(0, 0)
-}
-spriteset (spriteset_BR380_front_ScotRail_Saltire, "gfx/EMU/380.png") { 		template_train32px(0, 13) }
-spriteset (spriteset_BR380_middle_ScotRail_Saltire, "gfx/EMU/380.png") { 		template_train32px(0, 65) }
-spriteset (spriteset_BR380_middle_panto_ScotRail_Saltire, "gfx/EMU/380.png") { 	template_train32px(0, 91) }
-spriteset (spriteset_BR380_rear_ScotRail_Saltire, "gfx/EMU/380.png") { 			template_train32px(0, 39) }
+// ============================================================================
+// Class 380 normal-body sprites and native backwards-running light stack
+// ============================================================================
 
-switch(FEAT_TRAINS, SELF, sw_BR380_cargo_subtype_text, cargo_subtype){
-    0:	return string(str_ScotRailSaltire);
-    return CB_RESULT_NO_TEXT;
+spriteset(spriteset_BR380_lights_front_head, "gfx/EMU/380_lights.png") { template_train32px(0, 0) }
+spriteset(spriteset_BR380_lights_front_tail, "gfx/EMU/380_lights.png") { template_train32px(0, 26) }
+spriteset(spriteset_BR380_lights_rear_head, "gfx/EMU/380_lights.png") { template_train32px(0, 52) }
+spriteset(spriteset_BR380_lights_rear_tail, "gfx/EMU/380_lights.png") { template_train32px(0, 78) }
+spriteset(spriteset_BR380_lights_off, "gfx/EMU/380_lights.png") { template_train32px(0, 104) }
+
+spriteset(spriteset_BR380_Purchase, "gfx/EMU/380.png") {template_purchase(0, 0)}
+
+spriteset(spriteset_BR380_front_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 13) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 65) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 91) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire, "gfx/EMU/380.png") { template_train32px(0, 39) }
+
+spriteset(spriteset_BR380_front_ScotRail_Saltire_loading, "gfx/EMU/380.png") { template_train32px(200, 13) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire_loading, "gfx/EMU/380.png") { template_train32px(200, 65) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_loading, "gfx/EMU/380.png") { template_train32px(200, 91) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_loading, "gfx/EMU/380.png") { template_train32px(200, 39) }
+
+spriteset(spriteset_BR380_front_ScotRail_Saltire_Decals, "gfx/EMU/380.png") { template_train32px(0, 117) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire_Decals, "gfx/EMU/380.png") { template_train32px(0, 169) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_Decals, "gfx/EMU/380.png") { template_train32px(0, 195) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_Decals, "gfx/EMU/380.png") { template_train32px(0, 143) }
+
+spriteset(spriteset_BR380_front_ScotRail_Saltire_Decals_loading, "gfx/EMU/380.png") { template_train32px(200, 117) }
+spriteset(spriteset_BR380_middle_ScotRail_Saltire_Decals_loading, "gfx/EMU/380.png") { template_train32px(200, 169) }
+spriteset(spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_loading, "gfx/EMU/380.png") { template_train32px(200, 195) }
+spriteset(spriteset_BR380_rear_ScotRail_Saltire_Decals_loading, "gfx/EMU/380.png") { template_train32px(200, 143) }
+
+spritegroup spritegroup_BR380_front_ScotRail_Saltire {
+	loading: spriteset_BR380_front_ScotRail_Saltire_loading;
+	loaded: spriteset_BR380_front_ScotRail_Saltire;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR380_3car_ScotRail_Saltire, position_in_articulated_veh % 3) {
+spritegroup spritegroup_BR380_middle_ScotRail_Saltire {
+	loading: spriteset_BR380_middle_ScotRail_Saltire_loading;
+	loaded: spriteset_BR380_middle_ScotRail_Saltire;
+}
+
+spritegroup spritegroup_BR380_middle_panto_ScotRail_Saltire {
+	loading: spriteset_BR380_middle_panto_ScotRail_Saltire_loading;
+	loaded: spriteset_BR380_middle_panto_ScotRail_Saltire;
+}
+
+spritegroup spritegroup_BR380_rear_ScotRail_Saltire {
+	loading: spriteset_BR380_rear_ScotRail_Saltire_loading;
+	loaded: spriteset_BR380_rear_ScotRail_Saltire;
+}
+
+spritegroup spritegroup_BR380_front_ScotRail_Saltire_Decals {
+	loading: spriteset_BR380_front_ScotRail_Saltire_Decals_loading;
+	loaded: spriteset_BR380_front_ScotRail_Saltire_Decals;
+}
+
+spritegroup spritegroup_BR380_middle_ScotRail_Saltire_Decals {
+	loading: spriteset_BR380_middle_ScotRail_Saltire_Decals_loading;
+	loaded: spriteset_BR380_middle_ScotRail_Saltire_Decals;
+}
+
+spritegroup spritegroup_BR380_middle_panto_ScotRail_Saltire_Decals {
+	loading: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals_loading;
+	loaded: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals;
+}
+
+spritegroup spritegroup_BR380_rear_ScotRail_Saltire_Decals {
+	loading: spriteset_BR380_rear_ScotRail_Saltire_Decals_loading;
+	loaded: spriteset_BR380_rear_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_front_loading_mode, param_loading_sprites) {
 	0: spriteset_BR380_front_ScotRail_Saltire;
-	1: spriteset_BR380_middle_panto_ScotRail_Saltire;
-	2: spriteset_BR380_rear_ScotRail_Saltire;	
+	spritegroup_BR380_front_ScotRail_Saltire;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR380_3car, cargo_subtype) {
-	0: sw_BR380_3car_ScotRail_Saltire;
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_ScotRail_Saltire;
+	spritegroup_BR380_middle_ScotRail_Saltire;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR380_4car_ScotRail_Saltire, position_in_articulated_veh % 4) {
-	0: spriteset_BR380_front_ScotRail_Saltire;
-	1: spriteset_BR380_middle_ScotRail_Saltire;
-	2: spriteset_BR380_middle_panto_ScotRail_Saltire;
-	3: spriteset_BR380_rear_ScotRail_Saltire;	
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_panto_ScotRail_Saltire;
+	spritegroup_BR380_middle_panto_ScotRail_Saltire;
 }
 
-switch(FEAT_TRAINS, SELF, sw_BR380_4car, cargo_subtype) {
-	0: sw_BR380_4car_ScotRail_Saltire;
+switch(FEAT_TRAINS, SELF, sw_BR380_rear_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_rear_ScotRail_Saltire;
+	spritegroup_BR380_rear_ScotRail_Saltire;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_front_decals_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_front_ScotRail_Saltire_Decals;
+	spritegroup_BR380_front_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_decals_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_ScotRail_Saltire_Decals;
+	spritegroup_BR380_middle_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto_decals_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_middle_panto_ScotRail_Saltire_Decals;
+	spritegroup_BR380_middle_panto_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rear_decals_loading_mode, param_loading_sprites) {
+	0: spriteset_BR380_rear_ScotRail_Saltire_Decals;
+	spritegroup_BR380_rear_ScotRail_Saltire_Decals;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_ScotRailSaltire);
+	1: return string(str_ScotRailSaltireDecals);
+	return CB_RESULT_NO_TEXT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_front, cargo_subtype) {
+	0: sw_BR380_front_loading_mode;
+	1: sw_BR380_front_decals_loading_mode;
+	sw_BR380_front_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle, cargo_subtype) {
+	0: sw_BR380_middle_loading_mode;
+	1: sw_BR380_middle_decals_loading_mode;
+	sw_BR380_middle_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_middle_panto, cargo_subtype) {
+	0: sw_BR380_middle_panto_loading_mode;
+	1: sw_BR380_middle_panto_decals_loading_mode;
+	sw_BR380_middle_panto_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_rear, cargo_subtype) {
+	0: sw_BR380_rear_loading_mode;
+	1: sw_BR380_rear_decals_loading_mode;
+	sw_BR380_rear_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_3car_roles_fwd, position_in_articulated_veh % 3) {
+	0: sw_BR380_front;
+	1: sw_BR380_middle_panto;
+	2: sw_BR380_rear;
+	sw_BR380_middle_panto;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR380_4car_roles_fwd, position_in_articulated_veh % 4) {
+	0: sw_BR380_front;
+	1: sw_BR380_middle_panto;
+	2: sw_BR380_middle;
+	3: sw_BR380_rear;
+	sw_BR380_middle;
+}
+
+// The body layer uses normal vehicle sprites only. The light layer selects the
+// illuminated whole-consist end from OpenTTD's native backwards-running state;
+// all intermediate cabs receive the empty overlay.
+switch(FEAT_TRAINS, SELF, sw_BR380_body_layer,
+		[STORE_TEMP(CB_FLAG_MORE_SPRITES | PALETTE_USE_DEFAULT, 0x100), vehicle_type_id]) {
+	767: sw_BR380_3car_roles_fwd; 2767: sw_BR380_3car_roles_fwd;
+	768: sw_BR380_4car_roles_fwd; 2768: sw_BR380_4car_roles_fwd;
+	sw_BR380_3car_roles_fwd;
+}
+switch(FEAT_TRAINS, SELF, sw_BR380_lights_forward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR380_lights_rear_tail;
+	spriteset_BR380_lights_off;
+}
+switch(FEAT_TRAINS, SELF, sw_BR380_lights_forward, position_in_consist) {
+	0: spriteset_BR380_lights_front_head;
+	sw_BR380_lights_forward_from_end;
+}
+switch(FEAT_TRAINS, SELF, sw_BR380_lights_backward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR380_lights_rear_head;
+	spriteset_BR380_lights_off;
+}
+switch(FEAT_TRAINS, SELF, sw_BR380_lights_backward, position_in_consist) {
+	0: spriteset_BR380_lights_front_tail;
+	sw_BR380_lights_backward_from_end;
+}
+switch(FEAT_TRAINS, SELF, sw_BR380_light_layer,
+		[STORE_TEMP(PALETTE_IDENTITY, 0x100), train_is_driving_backwards]) {
+	1: sw_BR380_lights_backward;
+	sw_BR380_lights_forward;
+}
+switch(FEAT_TRAINS, SELF, sw_BR380_sprite_stack, getbits(extra_callback_info1, 8, 8)) {
+	1: sw_BR380_light_layer;
+	sw_BR380_body_layer;
 }
