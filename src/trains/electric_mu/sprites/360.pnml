@@ -296,8 +296,13 @@ switch(FEAT_TRAINS, SELF, sw_BR360_1_d, param_loading_sprites) {
 	sw_BR360_1_d_loading;
 }
 
+switch(FEAT_TRAINS, PARENT, sw_BR360_1_can_attach_within_limit, count_veh_id(item_BR360_1)) {
+	0..8: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_BR360_1_MULTIPLE_WORKING_LIMIT);
+}
+
 switch(FEAT_TRAINS, SELF, sw_BR360_1_can_attach_wagon, vehicle_type_id) {
-	item_BR360_1: return CB_RESULT_ATTACH_ALLOW;
+	item_BR360_1: sw_BR360_1_can_attach_within_limit;
 	return string(STR_CANNOT_ATTACH);
 }
 
@@ -386,9 +391,21 @@ switch(FEAT_TRAINS, SELF, sw_BR360_2_5car_roles_fwd, position_in_articulated_veh
 	sw_BR360_2_b;
 }
 
+switch(FEAT_TRAINS, PARENT, sw_BR360_2_can_attach_4car_within_limit,
+		count_veh_id(item_BR360_2_4car) + count_veh_id(item_BR360_2_5car)) {
+	0..8: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_BR360_2_MULTIPLE_WORKING_LIMIT);
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR360_2_can_attach_5car_within_limit,
+		count_veh_id(item_BR360_2_4car) + count_veh_id(item_BR360_2_5car)) {
+	0..7: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_BR360_2_MULTIPLE_WORKING_LIMIT);
+}
+
 switch(FEAT_TRAINS, SELF, sw_BR360_2_can_attach_wagon, vehicle_type_id) {
-	item_BR360_2_4car: return CB_RESULT_ATTACH_ALLOW;
-	item_BR360_2_5car: return CB_RESULT_ATTACH_ALLOW;
+	item_BR360_2_4car: sw_BR360_2_can_attach_4car_within_limit;
+	item_BR360_2_5car: sw_BR360_2_can_attach_5car_within_limit;
 	return string(STR_CANNOT_ATTACH);
 }
 
