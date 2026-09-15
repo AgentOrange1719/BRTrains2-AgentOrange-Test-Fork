@@ -1,0 +1,176 @@
+// ============================================================================
+// Class 450 normal-body sprites and native backwards-running lights
+// ============================================================================
+
+spriteset(spriteset_BR450_lights_front_head, "gfx/EMU/450_lights.png") { template_train32px_old(0, 0) }
+spriteset(spriteset_BR450_lights_front_tail, "gfx/EMU/450_lights.png") { template_train32px_old(0, 25) }
+spriteset(spriteset_BR450_lights_rear_head, "gfx/EMU/450_lights.png") { template_train32px_old(0, 50) }
+spriteset(spriteset_BR450_lights_rear_tail, "gfx/EMU/450_lights.png") { template_train32px_old(0, 75) }
+spriteset(spriteset_BR450_lights_off, "gfx/EMU/450_lights.png") { template_train32px_old(0, 100) }
+
+spriteset(spriteset_BR450_Purchase, "gfx/EMU/350_450.png") { template_purchase(400, 13) }
+
+spriteset(spriteset_BR450_a_SWT, "gfx/EMU/350_450.png") { template_train32px_old(0, 700) }
+spriteset(spriteset_BR450_a_SWT_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 700) }
+
+spriteset(spriteset_BR450_b_SWT, "gfx/EMU/350_450.png") { template_train32px_old(0, 725) }
+spriteset(spriteset_BR450_b_SWT_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 725) }
+
+spriteset(spriteset_BR450_c_SWT, "gfx/EMU/350_450.png") { template_train32px_old(0, 750) }
+spriteset(spriteset_BR450_c_SWT_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 750) }
+
+spriteset(spriteset_BR450_d_SWT, "gfx/EMU/350_450.png") { template_train32px_old(0, 775) }
+spriteset(spriteset_BR450_d_SWT_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 775) }
+
+spriteset(spriteset_BR450_a_SWR, "gfx/EMU/350_450.png") { template_train32px_old(0, 600) }
+spriteset(spriteset_BR450_a_SWR_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 600) }
+
+spriteset(spriteset_BR450_b_SWR, "gfx/EMU/350_450.png") { template_train32px_old(0, 625) }
+spriteset(spriteset_BR450_b_SWR_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 625) }
+
+spriteset(spriteset_BR450_c_SWR, "gfx/EMU/350_450.png") { template_train32px_old(0, 650) }
+spriteset(spriteset_BR450_c_SWR_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 650) }
+
+spriteset(spriteset_BR450_d_SWR, "gfx/EMU/350_450.png") { template_train32px_old(0, 675) }
+spriteset(spriteset_BR450_d_SWR_loading, "gfx/EMU/350_450.png") { template_train32px_old(200, 675) }
+
+spritegroup spritegroup_BR450_a_SWT {
+	loading: spriteset_BR450_a_SWT_loading;
+	loaded: spriteset_BR450_a_SWT;
+}
+
+spritegroup spritegroup_BR450_b_SWT {
+	loading: spriteset_BR450_b_SWT_loading;
+	loaded: spriteset_BR450_b_SWT;
+}
+
+spritegroup spritegroup_BR450_c_SWT {
+	loading: spriteset_BR450_c_SWT_loading;
+	loaded: spriteset_BR450_c_SWT;
+}
+
+spritegroup spritegroup_BR450_d_SWT {
+	loading: spriteset_BR450_d_SWT_loading;
+	loaded: spriteset_BR450_d_SWT;
+}
+
+spritegroup spritegroup_BR450_a_SWR {
+	loading: spriteset_BR450_a_SWR_loading;
+	loaded: spriteset_BR450_a_SWR;
+}
+
+spritegroup spritegroup_BR450_b_SWR {
+	loading: spriteset_BR450_b_SWR_loading;
+	loaded: spriteset_BR450_b_SWR;
+}
+
+spritegroup spritegroup_BR450_c_SWR {
+	loading: spriteset_BR450_c_SWR_loading;
+	loaded: spriteset_BR450_c_SWR;
+}
+
+spritegroup spritegroup_BR450_d_SWR {
+	loading: spriteset_BR450_d_SWR_loading;
+	loaded: spriteset_BR450_d_SWR;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_a_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR450_a_SWT;
+	spritegroup_BR450_a_SWT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_b_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR450_b_SWT;
+	spritegroup_BR450_b_SWT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_c_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR450_c_SWT;
+	spritegroup_BR450_c_SWT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_d_SWT_loading_mode, param_loading_sprites) {
+	0: spriteset_BR450_d_SWT;
+	spritegroup_BR450_d_SWT;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_a_SWR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR450_a_SWR;
+	spritegroup_BR450_a_SWR;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_b_SWR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR450_b_SWR;
+	spritegroup_BR450_b_SWR;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_c_SWR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR450_c_SWR;
+	spritegroup_BR450_c_SWR;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_d_SWR_loading_mode, param_loading_sprites) {
+	0: spriteset_BR450_d_SWR;
+	spritegroup_BR450_d_SWR;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_a, cargo_subtype) {
+	0: sw_BR450_a_SWT_loading_mode;
+	1: sw_BR450_a_SWR_loading_mode;
+	default: sw_BR450_a_SWT_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_b, cargo_subtype) {
+	0: sw_BR450_b_SWT_loading_mode;
+	1: sw_BR450_b_SWR_loading_mode;
+	default: sw_BR450_b_SWT_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_c, cargo_subtype) {
+	0: sw_BR450_c_SWT_loading_mode;
+	1: sw_BR450_c_SWR_loading_mode;
+	default: sw_BR450_c_SWT_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_d, cargo_subtype) {
+	0: sw_BR450_d_SWT_loading_mode;
+	1: sw_BR450_d_SWR_loading_mode;
+	default: sw_BR450_d_SWT_loading_mode;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_body_layer,
+		[STORE_TEMP(CB_FLAG_MORE_SPRITES | PALETTE_USE_DEFAULT, 0x100), position_in_articulated_veh % 4]) {
+	0: sw_BR450_a; 3: sw_BR450_d;
+	sw_BR450_b;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_lights_forward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR450_lights_rear_tail;
+	spriteset_BR450_lights_off;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_lights_forward, position_in_consist) {
+	0: spriteset_BR450_lights_front_head;
+	sw_BR450_lights_forward_from_end;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_lights_backward_from_end, position_in_consist_from_end) {
+	0: spriteset_BR450_lights_rear_head;
+	spriteset_BR450_lights_off;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_lights_backward, position_in_consist) {
+	0: spriteset_BR450_lights_front_tail;
+	sw_BR450_lights_backward_from_end;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_light_layer,
+		[STORE_TEMP(PALETTE_IDENTITY, 0x100), train_is_driving_backwards]) {
+	1: sw_BR450_lights_backward;
+	sw_BR450_lights_forward;
+}
+
+switch(FEAT_TRAINS, SELF, sw_BR450_sprite_stack, getbits(extra_callback_info1, 8, 8)) {
+	1: sw_BR450_light_layer;
+	sw_BR450_body_layer;
+}

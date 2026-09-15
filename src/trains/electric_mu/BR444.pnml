@@ -20,10 +20,29 @@ switch(FEAT_TRAINS, SELF, sw_BR444_cargo_capacity, position_in_articulated_veh %
 	return(70 * param_pax);
 }
 
-// Class 444 can multiple-work with Class 444 and Class 450.
+// Third-rail pickups are fitted to both cab cars.
+switch(FEAT_TRAINS, SELF, sw_BR444_create_effect, position_in_articulated_veh % 5) {
+	0: electric_create_visual_effect_SAA3;
+	4: electric_create_visual_effect_SAA3;
+	return 0;
+}
+
+// Class 444 can multiple-work with Class 444 and Class 450, up to 12 cars.
+switch(FEAT_TRAINS, PARENT, sw_BR444_can_attach_444_within_limit,
+		count_veh_id(item_BR444) + count_veh_id(item_BR450)) {
+	0..7: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_BR444_MULTIPLE_WORKING_LIMIT);
+}
+
+switch(FEAT_TRAINS, PARENT, sw_BR444_can_attach_450_within_limit,
+		count_veh_id(item_BR444) + count_veh_id(item_BR450)) {
+	0..8: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_BR444_MULTIPLE_WORKING_LIMIT);
+}
+
 switch(FEAT_TRAINS, SELF, sw_BR444_can_attach_wagon, vehicle_type_id) {
-	item_BR444: return CB_RESULT_ATTACH_ALLOW;
-	item_BR450: return CB_RESULT_ATTACH_ALLOW;
+	item_BR444: sw_BR444_can_attach_444_within_limit;
+	item_BR450: sw_BR444_can_attach_450_within_limit;
 	return string(STR_CANNOT_ATTACH);
 }
 
@@ -71,7 +90,7 @@ item(FEAT_TRAINS, item_BR444, 74) {
 		default: sw_BR444_sprite_stack;
 		purchase: spriteset_BR444_Purchase;
 		colour_mapping: return PALETTE_CC_FIRST;
-		create_effect: electric_create_visual_effect_SAA3;
+		create_effect: sw_BR444_create_effect;
 		sound_effect: sw_sound_electric_350;
 		cargo_capacity: sw_BR444_cargo_capacity;
 		cost_factor: return(GetAdjustedCost(85));
