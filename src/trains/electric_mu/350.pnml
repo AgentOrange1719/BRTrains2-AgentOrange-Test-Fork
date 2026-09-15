@@ -36,10 +36,19 @@ switch(FEAT_TRAINS, SELF, sw_articulated_BR350_34, extra_callback_info1) {
 	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
 }
 
+// Count all Class 350 cars already in the consist. As each unit has
+// four cars, allowing another unit only while this count is 8 or less caps
+// multiple working at three units (12 cars). 
+switch(FEAT_TRAINS, PARENT, sw_BR350_can_attach_another_unit,
+		count_veh_id(item_BR350_1) + count_veh_id(item_BR350_2) + count_veh_id(item_BR350_34)) {
+	0..8: return CB_RESULT_ATTACH_ALLOW;
+	return string(STR_BR350_MULTIPLE_WORKING_LIMIT);
+}
+
 switch(FEAT_TRAINS, SELF, sw_BR350_can_attach_wagon, vehicle_type_id) {
-	item_BR350_1:         return CB_RESULT_ATTACH_ALLOW;
-	item_BR350_2:         return CB_RESULT_ATTACH_ALLOW;
-	item_BR350_34:        return CB_RESULT_ATTACH_ALLOW;
+	item_BR350_1:         sw_BR350_can_attach_another_unit;
+	item_BR350_2:         sw_BR350_can_attach_another_unit;
+	item_BR350_34:        sw_BR350_can_attach_another_unit;
 	item_BRMk2_Translator: return CB_RESULT_ATTACH_ALLOW;
 	return string(STR_CANNOT_ATTACH);
 }
