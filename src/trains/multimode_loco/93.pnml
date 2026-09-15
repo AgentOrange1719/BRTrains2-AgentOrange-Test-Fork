@@ -49,7 +49,6 @@ item (FEAT_TRAINS, item_BR93, 691) {
 		tractive_effort_coefficient:	0.337;
 		air_drag_coefficient:			0.1;
 		length:							8;
-		effect_spawn_model_and_powered:	EFFECT_SPAWN_MODEL_DIESEL;
 		extra_weight_per_wagon:			0;
 		bitmask_vehicle_info:			0;
 	}
@@ -62,7 +61,6 @@ item (FEAT_TRAINS, item_BR93, 691) {
 	purchase:							spriteset_BR93_Purchase;
 	power:								switch_BR93_power;
 	colour_mapping: 					return PALETTE_CC_FIRST;
-	create_effect:						diesel_create_visual_effect;
 	sound_effect:						sw_sound_hybrid_88;
 	cost_factor:	return(GetAdjustedCost(50));
 	running_cost_factor: return(GetAdjustedCost(28));
