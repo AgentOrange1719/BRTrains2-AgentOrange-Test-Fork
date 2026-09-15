@@ -699,6 +699,7 @@ STR_NAME_BR185					:BR Class 185 "Desiro" (3-car)
 str_BR185_usage					:Express Passenger
 str_BR185_eos					:---
 str_BR185_liveries				:First Group, First TransPennine
+STR_BR185_MULTIPLE_WORKING_LIMIT	:The Class 185 is limited to 12 carriages multiple working.
 
 STR_NAME_BR220					:BR Class 220 "Voyager" (4-car)
 str_BR220_usage					:Express Passenger
@@ -821,10 +822,39 @@ str_BR334_usage					:Suburban Passenger
 str_BR334_eos					:---
 str_BR334_liveries				:"Carmine and Cream", ScotRail Saltire
 
-STR_NAME_BR350					:BR Class 350 "Desiro" (4-car)
+STR_NAME_BR350_1				:BR Class 350/1 "Desiro" (4-car)
+STR_NAME_BR350_2				:BR Class 350/2 "Desiro" (4-car)
+STR_NAME_BR350_34			:BR Class 350/3/4 "Desiro" (4-car)
 str_BR350_usage					:Passenger
 str_BR350_eos					:---
-str_BR350_liveries				:London Midland
+str_BR350_1_liveries			:London Midland, Silverlink/Central, LNWR Transitional, LNWR, LNWR (Eurovision Ukraine)
+str_BR350_2_liveries			:London Midland, LNWR Transitional
+str_BR350_34_liveries			:London Midland, TransPennine Express, LNWR
+STR_BR350_MULTIPLE_WORKING_LIMIT	:The Class 350 is limited to 12 carriages multiple working.
+str_BR350_1_capacity_1x		:230
+str_BR350_1_capacity_2x		:460
+str_BR350_1_capacity_3x		:690
+str_BR350_1_capacity_4x		:920
+str_BR350_1_capacity_hc_1x	:360
+str_BR350_1_capacity_hc_2x	:720
+str_BR350_1_capacity_hc_3x	:1080
+str_BR350_1_capacity_hc_4x	:1440
+str_BR350_2_capacity_1x		:270
+str_BR350_2_capacity_2x		:540
+str_BR350_2_capacity_3x		:810
+str_BR350_2_capacity_4x		:1080
+str_BR350_2_capacity_hc_1x	:363
+str_BR350_2_capacity_hc_2x	:726
+str_BR350_2_capacity_hc_3x	:1089
+str_BR350_2_capacity_hc_4x	:1452
+str_BR350_34_capacity_1x		:238
+str_BR350_34_capacity_2x		:476
+str_BR350_34_capacity_3x		:714
+str_BR350_34_capacity_4x		:952
+str_BR350_34_capacity_hc_1x	:363
+str_BR350_34_capacity_hc_2x	:726
+str_BR350_34_capacity_hc_3x	:1089
+str_BR350_34_capacity_hc_4x	:1452
 
 STR_NAME_ElectroTest			:TEST UNIT
 str_ElectroTest_usage			:
@@ -845,6 +875,8 @@ str_BR360_eos					:---
 str_BR360_1_liveries			:First "Barbie", NXEA Blue, NXEA Grey/White, EMR Blue, EMR Maroon, EMR Maroon with yellow cabs
 str_BR360_2_4car_liveries		:Heathrow Connect
 str_BR360_2_5car_liveries		:Heathrow Connect, Heathrow Express
+STR_BR360_1_MULTIPLE_WORKING_LIMIT	:The Class 360/1 is limited to 12 carriages multiple working.
+STR_BR360_2_MULTIPLE_WORKING_LIMIT	:The Class 360/2 is limited to 12 carriages multiple working.
 
 STR_NAME_APTE					:BR "APT-E" Prototype (4-car)
 str_APTE_usage			        :Express Passenger
@@ -926,7 +958,8 @@ STR_NAME_BR380_3car				:BR Class 380/0 "Desiro" (3-car)
 STR_NAME_BR380_4car				:BR Class 380/1 "Desiro" (4-car)
 str_BR380_usage     			:Urban Passenger
 str_BR380_eos		    		:---
-str_BR380_liveries		    	:ScotRail Saltire
+str_BR380_liveries		    	:ScotRail Saltire, Scotrail-Saltire (Decals)
+STR_BR380_MULTIPLE_WORKING_LIMIT	:The Class 380 is limited to 12 carriages multiple working.
 
 STR_NAME_BR378_4dc				:BR Class 378/1 "Electrostar" (4-Car)
 
@@ -1054,11 +1087,13 @@ STR_NAME_BR444					:BR Class 444 "Desiro"
 str_BR444_usage					:Passenger
 str_BR444_eos					:---
 str_BR444_liveries				:South West Trains
+STR_BR444_MULTIPLE_WORKING_LIMIT	:The Class 444 is limited to 12 carriages multiple working.
 
 STR_NAME_BR450					:BR Class 450 "Desiro"
 str_BR450_usage					:Passenger
 str_BR450_eos					:---
 str_BR450_liveries				:South West Trains
+STR_BR450_MULTIPLE_WORKING_LIMIT	:The Class 450 is limited to 12 carriages multiple working.
 
 STR_NAME_BR455					:BR Class 455
 STR_NAME_BR4557					:BR Class 455/7
@@ -1226,6 +1261,9 @@ str_BRContainer_usage			:Misc. Cargo
 str_BRContainer_eos				:---
 str_BRContainer_liveries		:Maersk, Tesco, Random
 
+STR_NAME_FFA                    :BR FFA Articulated Container Wagon
+str_FFA_liveries               :Random, Yellow, Tesco, Maersk
+
 STR_NAME_BRT_CovHop             :BRT PAA Covered Hopper
 STR_NAME_BRT_Whisky_CovHop      :BRT PAV Covered Hopper "Whisky CovHop"
 str_BRT_CovHop_usage            :Bulk Cargos
@@ -1302,6 +1340,7 @@ STR_NAME_BRMk2_Late_SO			:BR Mark 2 Coach (D-F Standard Class)
 STR_NAME_BRMk2_Late_FO			:BR Mark 2 Coach (D-F First Class)
 STR_NAME_BRMk2_BSO				:BR Mark 2 Guard (Brake Standard Class)
 STR_NAME_BRMk2_BFO				:BR Mark 2 Guard Coach (Brake First Class)
+STR_NAME_BRMk2_Translator		:BR Mark 2 Translator Wagon (Prototype)
 STR_NAME_BRMk2_Buffet			:BR Mark 2 Buffet Coach (First Class)
 STR_NAME_BRMk2_Pullaman			:BR Mark 2 Pullman Coach (First Class)
 STR_NAME_BRMk2_Sleeper			:BR Mark 2 Sleeper Coach
