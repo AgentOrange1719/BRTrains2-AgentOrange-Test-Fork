@@ -1,0 +1,109 @@
+spriteset(spriteset_FFA_purchase, "gfx/Freight/FFA_WIP2.png") {
+	template_purchase(135, 0)
+}
+
+spriteset(spriteset_FFA_leading, "gfx/Freight/FFA_WIP2.png") {
+	template_train20px(0, 0)
+}
+
+spriteset(spriteset_FFA_trailing, "gfx/Freight/FFA_WIP2.png") {
+	template_train20px(0, 20)
+}
+
+spriteset(spriteset_FFA_Tesco_leading, "gfx/Freight/FFA_WIP2.png") {
+	template_train20px(0, 40)
+}
+
+spriteset(spriteset_FFA_Tesco_trailing, "gfx/Freight/FFA_WIP2.png") {
+	template_train20px(0, 60)
+}
+
+spriteset(spriteset_FFA_Maersk_leading, "gfx/Freight/FFA_WIP2.png") {
+	template_train20px(0, 80)
+}
+spriteset(spriteset_FFA_Maersk_trailing, "gfx/Freight/FFA_WIP2.png") {
+	template_train20px(0, 100)
+}
+
+switch(FEAT_TRAINS, SELF, sw_FFA_Yellow_sprites, position_in_articulated_veh) {
+	0: spriteset_FFA_trailing;
+	1: spriteset_FFA_leading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_FFA_Tesco_sprites, position_in_articulated_veh) {
+	0: spriteset_FFA_Tesco_trailing;
+	1: spriteset_FFA_Tesco_leading;
+}
+
+switch(FEAT_TRAINS, SELF, sw_FFA_Maersk_sprites, position_in_articulated_veh) {
+	0: spriteset_FFA_Maersk_trailing;
+	1: spriteset_FFA_Maersk_leading;
+}
+
+random_switch(FEAT_TRAINS, SELF, sw_FFA_Random_sprites) {
+	1: sw_FFA_Yellow_sprites;
+	1: sw_FFA_Tesco_sprites;
+	1: sw_FFA_Maersk_sprites;
+}
+	
+switch(FEAT_TRAINS, SELF, sw_FFA_livery, cargo_subtype) {
+	0: sw_FFA_Random_sprites;
+	1: sw_FFA_Yellow_sprites;
+	2: sw_FFA_Tesco_sprites;
+	3: sw_FFA_Maersk_sprites;
+}
+
+switch(FEAT_TRAINS, SELF, sw_FFA_cargo_subtype_text, cargo_subtype) {
+	0: return string(str_Random);
+	1: return string(STR_LIVERY_SHORT, string(str_col_Yellow));
+	2: return string(str_Tesco);
+	3: return string(str_Maersk);
+}
+
+switch(FEAT_TRAINS, SELF, sw_FFA_articulated, extra_callback_info1) {
+	1: return item_FFA;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, sw_FFA_capacity, position_in_articulated_veh) {
+	0..1: return 50;
+}
+
+item(FEAT_TRAINS, item_FFA, 771) {
+	property {
+		name:                           string(STR_NAME_FFA);
+		climates_available:             ALL_CLIMATES;
+		track_type:                     RAIL;
+		introduction_date:              date(1965, 1, 1);
+		model_life:                     VEHICLE_NEVER_EXPIRES;
+		refittable_cargo_classes:       bitmask(CC_PIECE_GOODS, CC_EXPRESS, CC_HAZARDOUS, CC_REFRIGERATED, CC_NON_POURABLE, CC_NEO_BULK, CC_OVERSIZED);
+		misc_flags:                     bitmask(TRAIN_FLAG_AUTOREFIT);
+		refit_cost:                     0;
+		default_cargo_type:             GOOD;
+		loading_speed:                  25;
+		cost_factor:                    49;
+		running_cost_factor:            17;
+		power:                          0;
+		sprite_id:                      SPRITE_ID_NEW_TRAIN;
+		running_cost_base:              RUNNING_COST_STEAM;
+		cargo_capacity:                 50;
+		weight:                         18.5 ton;
+		speed:                          75 mph;
+		tractive_effort_coefficient:    0.08;
+		air_drag_coefficient:           0.07;
+		length:                         5;
+		bitmask_vehicle_info:           0;
+	}
+	graphics {
+		additional_text:                return(string(str_purchase_coach, string(str_FFA_liveries)));
+		articulated_part:               sw_FFA_articulated;
+		can_attach_wagon:               CB_RESULT_ATTACH_ALLOW;
+		default:                        sw_FFA_livery;
+		purchase:                       spriteset_FFA_purchase;
+		colour_mapping:                 return PALETTE_CC_FIRST;
+		cargo_capacity:                 sw_FFA_capacity;
+		cargo_subtype_text:             sw_FFA_cargo_subtype_text;
+		cost_factor:                    return(GetAdjustedCost(49));
+		running_cost_factor:            return(GetAdjustedCost(17));
+	}
+}
