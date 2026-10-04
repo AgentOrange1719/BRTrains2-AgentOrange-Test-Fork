@@ -1,6 +1,15 @@
+//6760hp on 25kV OHL, 5360hp on 3rd rail power
+//On dual voltage track, the OHL will be prefered
 switch(FEAT_TRAINS, SELF, switch_BR92_power, tile_powers_railtype("ELRL")) {	
 	1: return 6760;
 	return 5360;
+}
+
+//This switch tells the game to produce the OHL effect if OHLE is present, and the 3rd rail effect if not
+//Dual voltage track will use the OHL effect
+switch(FEAT_TRAINS, SELF, switch_BR92_create_effect, tile_powers_railtype("ELRL")) {
+    1: electric_create_visual_effect;
+    electric_create_visual_effect_SAA3;
 }
 
 item (FEAT_TRAINS, item_BR92, 723) {
@@ -44,6 +53,7 @@ item (FEAT_TRAINS, item_BR92, 723) {
 	default: 							sw_BR92;
 	purchase:							spriteset_BR92_Purchase;
 	colour_mapping: 					return PALETTE_CC_FIRST;
+	create_effect:						switch_BR92_create_effect;
 	power: 								switch_BR92_power;
 	cost_factor:	return(GetAdjustedCost(58));
 	running_cost_factor: return(GetAdjustedCost(58));
