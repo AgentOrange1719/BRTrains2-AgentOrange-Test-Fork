@@ -87,11 +87,12 @@ item(FEAT_TRAINS, item_FFA, 771) {
 		sprite_id:                      SPRITE_ID_NEW_TRAIN;
 		running_cost_base:              RUNNING_COST_STEAM;
 		cargo_capacity:                 50;
-		weight:                         18.5 ton;
+		weight:                         36.9 ton; //2x 18.45t, per Greenbrier Europe
 		speed:                          75 mph;
 		tractive_effort_coefficient:    0.08;
 		air_drag_coefficient:           0.07;
 		length:                         5;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_NONE;
 		bitmask_vehicle_info:           0;
 	}
 	graphics {
